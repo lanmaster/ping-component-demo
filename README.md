@@ -1,4 +1,5 @@
 # Skeleton Starter for Vaadin
+# + Ping Component to fast detect dead sessions 
 
 This project can be used as a starting point to create your own Vaadin application.
 It has the necessary dependencies and files to help you get started.
