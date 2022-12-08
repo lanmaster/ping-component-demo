@@ -1,6 +1,12 @@
 # Skeleton Starter for Vaadin
 # + Ping Component to fast detect dead sessions 
 
+Just start app as described in original readme. 
+Open some tabs in some browsers with address http://localhost:8080, 
+then close that tabs and look at the console.
+
+# Previous readme:
+
 This project can be used as a starting point to create your own Vaadin application.
 It has the necessary dependencies and files to help you get started.
 
