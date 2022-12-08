@@ -1,4 +1,4 @@
-# Skeleton Starter for Vaadin
+# Skeleton Starter for Vaadin (from https://vaadin.com/hello-world-starters) 
 # + Ping Component to fast detect dead sessions 
 
 Just start app as described in original readme. 
