@@ -4,20 +4,32 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.CallbackDataProvider;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinSession;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.vaadin.components.PersonComboBoxOnCallbacks;
+import org.vaadin.components.PersonComboBoxOnList;
 import org.vaadin.components.PingComponent;
+import org.vaadin.entities.Person;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The main view contains a button and a click listener.
@@ -41,30 +53,19 @@ public class MainView extends VerticalLayout {
 
 
     public MainView() {
-
-        PingComponent pingComponent = new PingComponent(this::listenPingReceived);
-
-        // Use TextField for standard text input
-        TextField textField = new TextField("Your name");
-        textField.addThemeName("bordered");
-
-        // Button click listeners can be defined as lambda expressions
-        GreetService greetService = new GreetService();
-        Button button = new Button("Say hello",
-                e -> Notification.show(greetService.greet(textField.getValue())));
-
-        // Theme variants give you predefined extra styles for components.
-        // Example: Primary button is more prominent look.
-        button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
-        // You can specify keyboard shortcuts for buttons.
-        // Example: Pressing enter in this view clicks the Button.
-        button.addClickShortcut(Key.ENTER);
-
         // Use custom CSS classes to apply styling. This is defined in shared-styles.css.
         addClassName("centered-content");
 
-        add(pingComponent, textField, button);
+
+        PingComponent pingComponent = new PingComponent(this::listenPingReceived);
+        PersonComboBoxOnCallbacks personComboBoxOnCallbacks = new PersonComboBoxOnCallbacks();
+        PersonComboBoxOnList personComboBoxOnList = new PersonComboBoxOnList();
+
+        add(
+                pingComponent,
+                personComboBoxOnCallbacks.getComponent(),
+                personComboBoxOnList.getComponent()
+        );
 
     }
 
